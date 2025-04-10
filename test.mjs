@@ -9,3 +9,9 @@ import { Node, LinkedList } from "./LinkedList.mjs";
 
 // console.log(node1.next.next.data)
 
+let list = new LinkedList();
+list.insertAt(0, 1)
+list.insertAt(1, 2)
+list.insertAt(2, 3)
+list.insertAt(3, 4)
+list.printAll();
