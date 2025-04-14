@@ -33,15 +33,15 @@ class LinkedList {
         this.count++;
     }
 
-    printAll () {
+    printAll() {
         let currentNode = this.head;
         let text = "["
 
-        while ( currentNode != null ) {
+        while (currentNode != null) {
             // console.log(currentNode.data)
             text += currentNode.data;
             currentNode = currentNode.next;
-            if ( currentNode != null ) {
+            if (currentNode != null) {
                 text += ",";
             }
         }
@@ -56,6 +56,35 @@ class LinkedList {
 
     insertLast(data) {
         this.insertAt(this.count, data)
+    }
+
+    deleteAt(index) {
+        if (index >= this.count || index < 0) {
+            throw new Error("범위를 넘어갔습니다.");
+        }
+        let currentNode = this.head;
+        if (index == 0) {
+            let deleteNode = this.head;
+            this.head = this.head.next;
+            this.count--;
+            return deleteNode;
+        } else {
+            for (let i = 0; i < index - 1; i++) {
+                currentNode = currentNode.next;
+            }
+            let deleteNode = currentNode.next;
+            currentNode.next = currentNode.next.next;
+            this.count--;
+            return deleteNode;
+        }
+    }
+    
+    deleteLast() {
+        this.deleteAt(this.count - 1);
+    }
+
+    getNodeAt() {
+        
     }
 }
 
