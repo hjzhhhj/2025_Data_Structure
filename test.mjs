@@ -42,3 +42,5 @@ list.insertLast(85)
 list.insertLast(86)
 
 list.printAll();
+
+console.log(list.getNodeAt(3))
