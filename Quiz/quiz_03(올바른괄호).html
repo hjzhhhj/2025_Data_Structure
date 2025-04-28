@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function solution(a) {
+            let answer = 0;
+            for ( let i = 0; i < a.length; i++ ) {
+                if ( answer >= 0 ) {
+                    if ( a.charAt(i) == '(' ) answer++;
+                    else if ( a.charAt(i) == ')' ) answer--;
+                }
+                else return false;
+            }
+            if ( answer == 0 ) return true;
+            else return false;
+        }
+
+        let a = ["(())()"]
+        // let a = ["(())())"]
+        console.log(solution());
+    </script>
+</body>
+
+</html>

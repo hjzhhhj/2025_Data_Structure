@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function solution(a) {
+            let answer = 0;
+            for (let i = 0; i < a.length; i++) {
+                if (answer >= 0) {  // <= 여기 answer >= 0이어야 해. (0일 때도 계속 진행해야 하니까)
+                    if (a.charAt(i) == '(') answer++;
+                    else if (a.charAt(i) == ')') answer--;
+                } else {
+                    return false;
+                }
+            }
+            return answer == 0;
+        }
+
+        let a = ["(())()"]
+        // let a = ["(())())"]
+        console.log(solution(a[0]));
+    </script>
+</body>
+</html>
