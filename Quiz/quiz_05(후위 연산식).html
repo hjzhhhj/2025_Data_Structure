@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Postfix Calculator</title>
+</head>
+<body>
+    <script>
+        function solution(str) {
+            let stack = [];
+            for (let x of str) {
+                if (!isNaN(x)) {
+                    stack.push(Number(x));
+                } else {
+                    let b = stack.pop();
+                    let a = stack.pop();
+                    switch (x) {
+                        case '+': stack.push(a + b); break;
+                        case '-': stack.push(a - b); break;
+                        case '*': stack.push(a * b); break;
+                        case '/': stack.push(a / b); break;
+                    }
+                }
+            }
+            return stack[0];
+        }
+
+        let str = "35-7*62/+";
+        // 해당 식은 ( (3 - 5) * 7 ) + (6 / 2) = (-2 * 7) + 3 = -14 + 3 = -11
+        console.log(solution(str));  // 출력: -11
+    </script>
+</body>
+</html>
