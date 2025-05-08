@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>괄호 안에 문자 제거</title>
+</head>
+<body>
+    <script>
+        function solution(str) {
+            let stack = [];
+            for (let i = 0; i < str.length; i++) { // let ch of str
+                let ch = str.charAt(i);
+                if (ch == ')') {
+                    while (stack.pop() != '('); 
+                } else {
+                    stack.push(ch);
+                }
+            }
+            answer = stack.join("")
+            return answer
+        }
+
+        let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+        console.log(solution(str)); 
+    </script>
+</body>
+</html>
