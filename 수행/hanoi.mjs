@@ -5,4 +5,4 @@ function hanoi (count, from, to, temp) {
     hanoi(count-1, temp, to, from);
 }
 
-hanoi(4, "A", "C", "B")
+hanoi(3, "A", "C", "B")

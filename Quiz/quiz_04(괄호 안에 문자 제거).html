@@ -8,6 +8,7 @@
             let stack = [];
             for (let i = 0; i < str.length; i++) { // let ch of str
                 let ch = str.charAt(i);
+                
                 if (ch == ')') {
                     while (stack.pop() != '('); 
                 } else {

@@ -2,12 +2,14 @@ class Node {
     constructor(data, next = null) {
         this.data = data;
         this.next = next;
+        this.prev = prev
     }
 }
 
-class LinkedList {
+class DoubleLinkedList {
     constructor() {
-        this.head = null;
+        this.head = null; // 삽입
+        this.tail = null; // 삭제 
         this.count = 0;
     }
 
@@ -19,15 +21,31 @@ class LinkedList {
         let newNode = new Node(data);
 
         if (index == 0) {
+
             newNode.next = this.head;
+
+            if (this.head != null) {
+                this.head.prev = newNode
+            }
+
             this.head = newNode;
+        } else if (index === this.count) {
+            newNode.next = null;
+            newNode.prev = this.tail;
         } else {
             let currentNode = this.head;
+
             for (let i = 0; i < index - 1; i++) {
                 currentNode = currentNode.next;
             }
+
             newNode.next = currentNode.next;
+            newNode.prev = currentNode;
             currentNode.next = newNode;
+        }
+
+        if (newNode.next == null) {
+            this.tail = newNode
         }
 
         this.count++;
@@ -65,7 +83,14 @@ class LinkedList {
         let currentNode = this.head;
         if (index == 0) {
             let deleteNode = this.head;
-            this.head = this.head.next;
+
+            if (this.head.next == null) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                this.head = this.head.next
+                this.head.prev = null;
+            }
             this.count--;
             return deleteNode;
         } else {
@@ -78,7 +103,7 @@ class LinkedList {
             return deleteNode;
         }
     }
-    
+
     deleteLast() {
         this.deleteAt(this.count - 1);
     }
