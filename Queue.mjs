@@ -1,8 +1,8 @@
 import { DoubleLinkedList } from "./DoubleLinkedList.mjs"
 
-class Queue { 
+class Queue {
     constructor() {
-        this.list = new DoubleLinkedList()
+        this.list = new DoubleLinkedList();
     }
 
     enqueue(data) {
@@ -12,16 +12,13 @@ class Queue {
     dequeue() {
         try {
             return this.list.deleteLast();
-        } catch (e) {
+        }
+        catch(e) {
             return null;
         }
     }
-
-    front() {
-        return this.list.tail;
-    }
-
-    isEmpty() {
-        
-    }
+        front() {
+            return this.list.tail;
+        }
+        isEmpty
 }
