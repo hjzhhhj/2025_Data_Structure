@@ -1,31 +1,37 @@
 <html>
+
 <head>
     <title>교육과정 설계 </title>
 </head>
+
 <body>
     <script>
-        function solution(need,plan) {
+        function solution(need, plan) {
             let answer = "YES";
-            console.log(split());
-            let queue = need.split(' ');
-            //console.log(queue);
+            let queue = need.split('');  // 'CBA' → ['C','B','A']
 
-            for(let x of plan) {
-                //console.log(x);
-                if(queue.includes(x)) {
-                    //console.log(x);
-                    if(x!==queue.shift()) return answer = "NO";
+            // plan의 각 과목을 확인
+            for (let x of plan) {  // 'CBDAGE'를 한 글자씩
+                // x가 필수과목에 있나?
+                if (queue.includes(x)) {
+                    // 필수과목이면 반드시 순서가 맞아야 함
+                    if (x !== queue.shift()) {
+                        return "NO";  // 순서 틀림!
+                    }
                 }
+                // 필수과목 아니면 그냥 넘어감
             }
-            if(queue.length>0) return answer = "NO!";
 
-            console.log(queue);
+            // 필수과목이 남아있으면 안됨
+            if (queue.length > 0) return "NO";
+
             return answer;
         }
-        let a = "CBA";
-        let b = "CBDAGE"
 
-        console.log(solution());
+        let a = "CBA";
+        let b = "CBDAGE";
+        console.log(solution(a, b));  // "YES"
     </script>
 </body>
+
 </html>

@@ -5,7 +5,6 @@ class Deque {
         this.list = new DoubleLinkedList();
     }
 
-
     printAll() {
         this.list.printAll();
     }

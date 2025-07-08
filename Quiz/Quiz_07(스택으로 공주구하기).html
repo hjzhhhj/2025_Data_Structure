@@ -1,26 +1,30 @@
 <html>
+
 <head>
     <title>공주 구하기! - 큐</title>
 </head>
+
 <body>
     <script>
         function solution(n, k) {
-            let queue = Array.from({length:n}, (v, i) => i+1);
-            console.log(queue);
+            // 1부터 8까지 배열 만들기: [1,2,3,4,5,6,7,8]
+            let queue = Array.from({ length: n }, (v, i) => i + 1);
+            let answer;
 
-            let a = queue.shift();
-
-            console.log(a);
-
-            while(queue.length) {
-                for(let i = 1; i < k; i++) queue.push(queue.shift());
-
-                if(queue.length===1) answer = queue.shift();
+            while (queue.length > 1) {  // 한 명 남을 때까지 반복
+                // k-1번 반복 (3번째를 찾으려면 2명을 뒤로 보내야 함)
+                for (let i = 1; i < k; i++) {
+                    queue.push(queue.shift());  // 앞사람 빼서 → 뒤로 보내기
+                }
+                // 이제 맨 앞이 k번째 사람
+                queue.shift();  // k번째 사람 아웃!
             }
-            
+
+            answer = queue[0];  // 마지막 남은 1명이 정답
             return answer;
         }
         console.log(solution(8, 3))
     </script>
 </body>
+
 </html>
