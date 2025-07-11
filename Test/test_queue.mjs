@@ -1,4 +1,4 @@
-import { Queue } from "../이해완!/Queue.mjs"
+import { Queue } from "../Queue.mjs"
 
 let quere = new Quere();
 
