@@ -1,0 +1,97 @@
+<html>
+<head>
+    <title>String 내장함수</title>
+</head>
+<body>
+    <script>
+        // length : 문자열의 길이를 리턴
+        var txt = "ABCDEFGHIGKLMNOPQRSTUVWXYZ"
+        console.log(txt.length);
+
+        // indexOf : 문자열의 인덱스 위치를 찾아줌, 없으면 -1 리턴
+        var str = "Hello! My name is Heejin"
+        console.log(str.indexOf("name"))
+        console.log(str.indexOf("Name")) // 대소문자를 구분함
+
+        // 응용 : 문자가 있는지 없는지 확인
+        var find = "Heejin"
+        if ( str.indexOf(find) != -1 ) {
+            console.log(find+" 문자 발견!")
+        } else {
+            console.log(find+" 문자 없음!")
+        }
+
+        // search : 있는지 확인해주는 함수
+        console.log(str.search("name"))
+
+        // lastindexOf : 문자열을 뒤에서부터 검색
+        console.log(str.lastIndexOf("e"))
+
+        // slice(a, b) : 문자열의 일부만 추출해주는 내장 함수
+        // a 인덱스 부터 b-1 인덱스까지 추출
+        var str = "Apple, Banana, Kiwi"
+        console.log(str.slice(7,13))
+        console.log(str.slice(7))
+        console.log(str.slice(-12,-6))
+
+        // subString : 문자열의 일부만 추출해주는 내장 함수
+        // a 인덱스 부터 b-1 인덱스까지 추출
+        console.log(str.substring(7,13))
+        console.log(str.substring(7))
+
+        // substr : 첫번째 인덱스부터 6글자 추출
+        console.log(str.substr(7,6))
+
+        var jun = "090120" // 몇 글자를 가져올 지 알고 있는 경우 유용!
+        console.log(jun.substr(0,2))
+        console.log(jun.substr(2,2))
+        console.log(jun.substr(4,2))
+
+        // replace
+        str.replace("Heejin", "Jinhee")
+
+        var str1 = "here here Here here here"
+
+        console.log(str1.replace(/here/g, "There")) // global(전체)를 의미
+
+        console.log(str1.replace(/here/gi, "There")) // ignore(무시)를 의미 대소문자를 무시함
+
+        console.log(str.toUpperCase()) // 전부 대문자로 표기
+        console.log(str.toLowerCase()) // 전부 소문자로 표시
+
+        // concat : 문자열 연결
+        var cc = "Hello"
+        var cc1 = "World"
+        console.log(cc+" "+cc1)
+        console.log(cc.concat(cc1))
+        console.log(cc.concat(" ", cc1))
+        console.log(cc.concat(", ", cc1))
+
+        // trim : 문자열에서 앞 뒤 공백 없앨 때
+        var tr = "      ih.      "
+        console.log(tr.trim())
+        console.log(tr.trimLeft())
+        console.log(tr.trimRight())
+
+        // padStart : 문자열의 앞 부분을 특정 길이로 채우는 함수
+        var num = "123"
+        console.log(num.padStart(5, "0"))
+
+        // padEnd : 문자열의 뒤 부분을 특정 길이로 채우는 함수
+        console.log(num.padEnd(5, "0"))
+        
+        // spilt, join
+        var strr = "키보드,마우스,모니터"
+        var arr = strr.split(",") // ,을 기준으로 배열에 저장
+        console.log(arr) // 배열
+        console.log(arr.join(", ")) // 배열을 ,로 이어붙여서 문자열로 반환
+
+        var birthday = "2025-07-14"
+        var birth = birthday.split("-")
+        console.log(birth) // 배열로 반환
+        console.log(birth[0]) // 년도
+        console.log(birth[1]) // 월
+        console.log(birth[2]) // 일
+    </script>
+</body>
+</html>
