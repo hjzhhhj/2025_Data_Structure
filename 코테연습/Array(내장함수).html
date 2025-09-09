@@ -77,7 +77,7 @@
         // slice(a, b) : a부터 b-1까지의 아이템을 가져옴
 
         // var fruits6 = ["Banana", "Orange", "Apple"]
-        
+
         // var arr = fruit6.slice(1)
         // var arr = fruit6.slice(1, 2)
         // var arr = fruit6.slice(1, 3)
@@ -86,11 +86,11 @@
 
         // sort : 정렬 ( 오름차순, 내림차순 )
 
-        var fruits7 = ["Banana", "Orange", "Apple", "kiwi", "Mango"]
-        console.log(fruits7.sort())
+        // var fruits7 = ["Banana", "Orange", "Apple", "kiwi", "Mango"]
+        // console.log(fruits7.sort())
 
-        var points = [40, 100, 70, 21, 99]
-        console.log(points.sort()) // 출력값 : 100, 21, 40, 70, 99 (숫자를 문자로 인식)
+        // var points = [40, 100, 70, 21, 99]
+        // console.log(points.sort()) // 출력값 : 100, 21, 40, 70, 99 (숫자를 문자로 인식)
         // points.sort(function(a, b){
         //     if (a>b) {
         //         return 1;
@@ -100,12 +100,59 @@
         //         return 0;
         //     }
         // })
-        points.sort(function(a, b){
-            return a-b; // 오름차순
-            // return b-a; // 내림차순
+        // points.sort(function(a, b){
+        // return a-b; // 오름차순
+        // return b-a; // 내림차순
+        // })
+        // console.log(points)
+        // console.log(points.reverse()) // 역순으로
+
+        // filter() : 조건에 맞는 배열만 리턴
+        var persons = [
+            { name: "유재석", point: 78 },
+            { name: "김종국", point: 92 },
+            { name: "양세찬", point: 76 },
+            { name: "하  하", point: 81 }
+        ];
+
+        var pass = persons.filter(function (per) {
+            return per.point >= 80;
+        });
+
+        console.log(pass);
+
+        var persons = [
+            { name: "유재석", point: 78, city: "서울" },
+            { name: "김종국", point: 92, city: "대구" },
+            { name: "양세찬", point: 76, city: "서울" },
+            { name: "하  하", point: 81, city: "제주" }
+        ];
+
+        var jeju = [];
+
+        for (var i = 0; i < persons.length; i++) {
+            if (persons[i].city === "제주") {
+                jeju.push(persons[i]);
+            }
+        }
+        console.log(jeju);
+
+        persons.filter(function (obj) {
+            return obj.city === "제주";
+        });
+        console.log(jeju);
+
+        // reduce
+        var arr3 = [1, 2, 3, 4];
+
+        for ( var x of arr3 ) {
+            total += x
+        }
+
+        var arr4 = [1, 2, 3, 4];
+        var total = arr4.reduce(function(a, c) {
+            return a+c
         })
-        console.log(points)
-        console.log(points.reverse()) // 역순으로
     </script>
 </body>
 

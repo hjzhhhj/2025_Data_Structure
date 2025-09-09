@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution() {
+        class Binarytree {
+          constructor(value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+          }
+
+          preorder(node) {
+            let result = "";
+            if (node) {
+              result += node.value + " ";
+              result += this.preorder(node.left);
+              result += this.preorder(node.right);
+            }
+            return result;
+          }
+          inorder(node) {
+            let result = "";
+            if (node) {
+              result += this.inorder(node.left);
+              result += node.value + " ";
+              result += this.inorder(node.right);
+            }
+            return result;
+          }
+          postorder(node) {
+            let result = "";
+            if (node) {
+              result += this.postorder(node.left);
+              result += this.postorder(node.right);
+              result += node.value + " ";
+            }
+            return result;
+          }
+        }
+
+        let answer = 0;
+
+        let tree1 = new Binarytree(1);
+        let tree2 = new Binarytree(2);
+        let tree3 = new Binarytree(3);
+        let tree4 = new Binarytree(4);
+        let tree5 = new Binarytree(5);
+        let tree6 = new Binarytree(6);
+        let tree7 = new Binarytree(7);
+
+        tree1.left = tree2;
+        tree1.right = tree3;
+        tree2.left = tree4;
+        tree2.right = tree5;
+        tree3.left = tree6;
+        tree3.right = tree7;
+
+        answer =
+          "전위 운행 : " +
+          tree1.preorder(tree1) +
+          "\n중위 운행 : " +
+          tree1.inorder(tree1) +
+          "\n후위 운행 : " +
+          tree1.postorder(tree1);
+
+        return answer;
+      }
+      console.log(solution());
+    </script>
+  </body>
+</html>
