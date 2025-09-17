@@ -17,3 +17,6 @@ class Vertex {
     }
   }
 }
+
+let ben = new Vertex("Ben");
+let jake = new Vertex("Jake");
