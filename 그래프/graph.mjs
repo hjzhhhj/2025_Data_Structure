@@ -20,3 +20,25 @@ class Vertex {
 
 let ben = new Vertex("Ben");
 let jake = new Vertex("Jake");
+let joy = new Vertex("Joy");
+let ivy = new Vertex("Ivy");
+let alin = new Vertex("Alin");
+let anna = new Vertex("Anna");
+let david = new Vertex("David");
+
+ben.addAdjacent(jake);
+ben.addAdjacent(joy);
+ben.addAdjacent(ivy);
+ben.addAdjacent(anna);
+
+joy.addAdjacent(ivy);
+
+ivy.addAdjacent(joy);
+ivy.addAdjacent(alin);
+
+alin.addAdjacent(anna);
+
+anna.addAdjacent(david);
+anna.addAdjacent(alin);
+
+david.addAdjacent(anna);
