@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title></title>
+    <script>
+      function solution() {
+        let answer;
+
+        function BFS() {
+          let queue = [];
+          queue.push(1);
+          let ch = Array.from({ length: 8 }, () => 0);
+          ch[1] = 1;
+
+          while (queue.length) {
+            let v = queue.shift();
+            console.log(v);
+            for (let nv of [v * 2, v * 2 + 1]) {
+              if (nv <= 7 && ch[nv] === 0) {
+                ch[nv] = 1;
+                queue.push(nv);
+              }
+            }
+          }
+        }
+
+        BFS();
+
+        return answer;
+      }
+
+      console.log(solution());
+    </script>
+  </head>
+  <body></body>
+</html>

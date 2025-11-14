@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>트리의 운행(전위, 중위, 후위)</title>  
+    <script>
+        function solution(v) {
+            let answer="";
+
+            function traversal(v) {
+                // preOrder
+                // if(v>7) return;                
+                // console.log(v);
+                // traversal(v*2);
+                // traversal(v*2+1);
+
+                // inOrder
+                // if(v>7) return;    
+                // traversal(v*2);
+                // console.log(v);
+                // traversal(v*2+1);
+
+                // postOrder
+                if(v>7) return;    
+                traversal(v*2);
+                traversal(v*2+1);                
+                console.log(v);
+
+            } // traversal
+
+            traversal(v);
+
+            return answer;
+        }
+
+        console.log(solution(1));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

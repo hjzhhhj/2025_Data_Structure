@@ -1,31 +1,34 @@
 <html>
-  <head>
-    <title>Document</title>
-  </head>
-  <body>
+<head>
+    <title>바둑이 승차 - 이진트리(DFS)</title>  
     <script>
-      function solution(max, arr) {
-        let answer = 0;
-        let n = arr.length;
+        function solution(c, arr) {
+            let answer=Number.MIN_SAFE_INTEGER;
+            let n = arr.length;
+            let i = 1;
 
-        function DFS(L, sum) {
-          if (L == n) {
-            if (sum <= max) {
-              answer = Math.max(answer, sum);
-            }
-            return;
-          } else {
-            DFS(L + 1, sum + arr[L]);
-            DFS(L + 1, sum);
-          }
+            function DFS(L, sum) {
+
+                if(sum>c) return;
+                if(L===n) {              // 기저조건
+                    // console.log(sum + " " + i++);
+                    answer = Math.max(answer, sum);
+                }
+                else {              // 재귀함수
+                    DFS(L+1, sum + arr[L]);
+                    DFS(L+1, sum);             
+                }
+
+            } // DFS
+            DFS(0,0);
+            return answer;
         }
-
-        DFS(0, 0);
-        return answer;
-      }
-
-      let arr = [81, 58, 42, 33, 61];
-      console.log(solution(259, arr));
+        
+        let arr = [81, 58, 42, 33, 61];
+        console.log(solution(259, arr));
     </script>
-  </body>
+</head>
+<body>
+    
+</body>
 </html>
