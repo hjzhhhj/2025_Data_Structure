@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title></title>
+    <script>
+      function solution(S, E) {
+        let answer = 0;
+        let ch = Array.from({ length: 15 }, () => 0);
+        let dis = Array.from({ length: 15 }, () => 0);
+        let queue = [];
+
+        ch[S] = 1;
+        queue.push(S);
+
+        while (queue.length) {
+          let x = queue.shift();
+
+          for (let nx of [x - 1, x + 1, x + 5]) {
+            if (nx === E) {
+              return dis[x] + 1;
+            }
+
+            if (nx >= 1 && nx <= 14 && ch[nx] === 0) {
+              ch[nx] = 1;
+              dis[nx] = dis[x] + 1;
+              queue.push(nx);
+            }
+          }
+        }
+
+        return answer;
+      }
+
+      console.log(solution(5, 14));
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,34 +1,33 @@
 <html>
-<head>
-    <title>바둑이 승차 - 이진트리(DFS)</title>  
+  <head>
+    <title>바둑이 승차 - 이진트리(DFS)</title>
     <script>
-        function solution(c, arr) {
-            let answer=Number.MIN_SAFE_INTEGER;
-            let n = arr.length;
-            let i = 1;
+      function solution(c, arr) {
+        let answer = Number.MIN_SAFE_INTEGER; // 최대 합을 저장할 변수, 초기값은 매우 작은 값
+        let n = arr.length; // 물건(바둑이) 개수
+        let i = 1; // 선택 순서 출력용 (현재는 주석 처리)
 
-            function DFS(L, sum) {
+        function DFS(L, sum) {
+          // L: 현재 물건 인덱스, sum: 현재까지 합
+          if (sum > c) return; // 합이 제한 용량 c를 넘으면 더 이상 진행 X
+          if (L === n) {
+            // 기저조건: 마지막 물건까지 확인했으면
+            // console.log(sum + " " + i++); // 선택된 합과 순서를 출력(디버그용)
+            answer = Math.max(answer, sum); // 최대 합 갱신
+          } else {
+            // 재귀 호출: 현재 물건 선택 여부 결정
+            DFS(L + 1, sum + arr[L]); // 현재 물건 포함하고 다음 물건으로 이동
+            DFS(L + 1, sum); // 현재 물건 제외하고 다음 물건으로 이동
+          }
+        } // DFS
 
-                if(sum>c) return;
-                if(L===n) {              // 기저조건
-                    // console.log(sum + " " + i++);
-                    answer = Math.max(answer, sum);
-                }
-                else {              // 재귀함수
-                    DFS(L+1, sum + arr[L]);
-                    DFS(L+1, sum);             
-                }
+        DFS(0, 0); // 0번 인덱스 물건부터 DFS 시작, 초기 합 0
+        return answer; // 제한 용량 내 최대 합 반환
+      }
 
-            } // DFS
-            DFS(0,0);
-            return answer;
-        }
-        
-        let arr = [81, 58, 42, 33, 61];
-        console.log(solution(259, arr));
+      let arr = [81, 58, 42, 33, 61]; // 각 바둑이 무게
+      console.log(solution(259, arr)); // 최대 합 출력
     </script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body></body>
 </html>

@@ -1,38 +1,33 @@
 <html>
-<head>
-    <title>부분집합 구하기 - 트리 운행</title>  
+  <head>
+    <title>부분집합 구하기 - 트리 운행</title>
     <script>
-        function solution(n) {
-            let answer=[];
-            // let ch = [0,0,0,0];
-            let ch = Array.from({length:n+1}, () => 0);
+      function solution(n) {
+        let answer = [];
+        let ch = Array.from({ length: n + 1 }, () => 0);
+        // let ch = [0, 0, 0, 0]
 
-            function DFS(v) {
-                if(v===(n+1)) {
-                    let temp = "";
-                    for(let i=1; i<=n; i++) {
-                        if(ch[i]===1) temp += i + " ";
-                    }
-                    // console.log(temp);
-                    answer.push(temp.trim());
-                }
-                else {
-                    ch[v] = 1;
-                    DFS(v+1);
-                    ch[v] = 0;
-                    DFS(v+1)
-                }
+        function DFS(v) {
+          if (v === n + 1) {
+            let temp = "";
+            for (let i = 1; i <= n; i++) {
+              if (ch[i] === 1) temp += i + " ";
+            }
+            answer.push(temp.trim());
+          } else {
+            ch[v] = 1;
+            DFS(v + 1);
+            ch[v] = 0;
+            DFS(v + 1);
+          }
+        } // DFS
 
-            } // DFS
-            DFS(1);
+        DFS(1);
+        return answer;
+      }
 
-            return answer;
-        }
-
-        console.log(solution(3));
+      console.log(solution(3));
     </script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body></body>
 </html>

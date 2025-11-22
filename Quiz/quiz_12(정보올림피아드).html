@@ -1,36 +1,33 @@
 <html>
-<head>
-    <title>정보올림피아드 - 이진트리</title>  
+  <head>
+    <title>정보올림피아드 - 이진트리</title>
     <script>
-        function solution(m, ps, pt) {
-            let answer=Number.MIN_SAFE_INTEGER;
-            let n = ps.length;
+      function solution(m, ps, pt) {
+        let answer = Number.MIN_SAFE_INTEGER; // 제한 시간 내 최대 점수를 저장할 변수
+        let n = ps.length; // 문제 개수
 
-            function DFS(L, sum, time) {
-                if(time>m) return;                
-                if(L===n) {  // 기저조건
-                    // console.log(sum);
-                    // console.log(time);
-                    // console.log(sum, time);
-                   answer = Math.max(answer, sum);
-                }
-                else {  // 재귀호출
-                    DFS(L+1, sum+ps[L], time+pt[L]);
-                    DFS(L+1, sum, time);
-                }
-            }
-
-            DFS(0, 0, 0);
-
-            return answer;
+        function DFS(L, sum, time) {
+          // L: 문제 인덱스, sum: 현재 점수 합, time: 사용한 시간 합
+          if (time > m) return; // 제한 시간 초과 시 더 이상 진행 X
+          if (L === n) {
+            // 기저조건: 모든 문제를 확인했으면
+            // console.log(sum, time);        // 디버그용: 현재 점수와 시간 출력
+            answer = Math.max(answer, sum); // 최대 점수 갱신
+          } else {
+            // 재귀 호출: 문제 선택 여부 결정
+            DFS(L + 1, sum + ps[L], time + pt[L]); // 현재 문제 선택
+            DFS(L + 1, sum, time); // 현재 문제 미선택
+          }
         }
 
-        let ps = [10, 25, 15, 6, 7];
-        let pt = [5, 12, 8, 3, 4];
-        console.log(solution(20, ps, pt));
+        DFS(0, 0, 0); // 0번 문제부터 DFS 시작, 초기 점수 0, 초기 시간 0
+        return answer; // 제한 시간 내 최대 점수 반환
+      }
+
+      let ps = [10, 25, 15, 6, 7]; // 각 문제 점수
+      let pt = [5, 12, 8, 3, 4]; // 각 문제 풀이 시간
+      console.log(solution(20, ps, pt)); // 제한 시간 20 내 최대 점수 출력
     </script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body></body>
 </html>

@@ -1,31 +1,29 @@
 <html>
-<head>
-    <title></title>  
+  <head>
+    <title>BFS 완전 이진트리</title>
     <script>
-        function solution() {
-            let answer="";
-            let queue = [];
-            queue.push(1);
+      function solution() {
+        let answer = ""; // 방문 순서 저장
+        let queue = []; // BFS용 큐
+        queue.push(1); // 루트 노드 1 삽입
 
-            while(queue.length) {
-                let v = queue.shift();
-                answer += v + " ";
-                for(let nv of [v*2, v*2+1]) {
-                    if(nv>7) break;
-                    queue.push(nv);
-                }
-            } // while
+        while (queue.length) {
+          // 큐가 빌 때까지 반복
+          let v = queue.shift(); // 큐에서 노드 꺼내기
+          answer += v + " "; // 방문 기록
 
-
-
-
-            return answer;
+          // 자식 노드 생성: 왼쪽 = v*2, 오른쪽 = v*2+1
+          for (let nv of [v * 2, v * 2 + 1]) {
+            if (nv > 7) break; // 최대 노드 값 7까지만
+            queue.push(nv); // 큐에 삽입
+          }
         }
 
-        console.log(solution());
+        return answer; // 방문 순서 반환
+      }
+
+      console.log(solution()); // 결과 출력
     </script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body></body>
 </html>

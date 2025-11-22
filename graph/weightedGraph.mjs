@@ -1,19 +1,17 @@
 class WeightedGraphVertex {
+  constructor(value) {
+    this.value = value;
+    this.adjacent_vertices = {};
+  }
 
-    constructor(value) {
-        this.value = value;
-        this.adjacent_vertices = {};        
-    }
+  addAdjacentVertex(vertex, weight) {
+    this.adjacent_vertices[vertex.value] = weight;
+  }
 
-    addAdjacentVertex(vertex, weight) {
-        this.adjacent_vertices[vertex.value] = weight;
-    }
-
-    removeAdjacentVertex(vertex) {
-        delete this.adjacent_vertices[vertex.value];
-    }
+  removeAdjacentVertex(vertex) {
+    delete this.adjacent_vertices[vertex.value];
+  }
 } // class
-
 
 let seoul = new WeightedGraphVertex("서울");
 let wonju = new WeightedGraphVertex("원주");

@@ -1,45 +1,60 @@
 <html>
-<head>
-    <title></title>  
+  <head>
+    <title>미로 탐색 - DFS</title>
     <script>
-        function solution(board) {
-            let answer=0;
-            let dx = [-1, 0, 1, 0];
-            let dy = [0, 1, 0, -1];
-            function DFS(x,y) {
-                if(x===6 && y===6) {                  // 기저 조건 
-                    answer++;
-                }
-                else {                  // 재귀 호출
-                    for(let k=0; k<dx.length; k++) {
-                        let nx = x + dx[k];
-                        let ny = y + dy[k];
-                        if(nx>=0 && nx<=6 && ny>=0 && ny<=6 && board[nx][ny]===0) {
-                            board[nx][ny] = 1;
-                            DFS(nx, ny);
-                            board[nx][ny] = 0;      
-                        }
-                    }
-                }
-            } // DFS
-            board[0][0] = 1;
-            DFS(0,0);
-            return answer;
+      // board: 7x7 미로 배열, 0=길, 1=벽
+      function solution(board) {
+        let answer = 0; // 총 경로 개수 저장
+
+        // 상, 우, 하, 좌 이동을 위한 델타 배열
+        let dx = [-1, 0, 1, 0];
+        let dy = [0, 1, 0, -1];
+
+        // DFS 함수 정의
+        function DFS(x, y) {
+          if (x === 6 && y === 6) {
+            // 기저 조건: 도착점 도달
+            answer++; // 경로 발견
+          } else {
+            // 재귀 호출
+            for (let k = 0; k < dx.length; k++) {
+              let nx = x + dx[k]; // 다음 x좌표
+              let ny = y + dy[k]; // 다음 y좌표
+              // 미로 범위 안이고, 길(0)이라면
+              if (
+                nx >= 0 &&
+                nx <= 6 &&
+                ny >= 0 &&
+                ny <= 6 &&
+                board[nx][ny] === 0
+              ) {
+                board[nx][ny] = 1; // 방문 표시
+                DFS(nx, ny); // 재귀 호출
+                board[nx][ny] = 0; // 방문 해제 (백트래킹)
+              }
+            }
+          }
         }
 
-        let arr = [
-            [0, 0, 0, 0, 0, 0, 0], 
-            [0, 1, 1, 1, 1, 1, 0],
-            [0, 0, 0, 1, 0, 0, 0], 
-            [1, 1, 0, 1, 0, 1, 1],
-            [1, 1, 0, 0, 0, 0, 1],
-            [1, 1, 0, 1, 1, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0]
-        ];
-        console.log(solution(arr));
+        board[0][0] = 1; // 시작점 방문 표시
+        DFS(0, 0); // DFS 시작
+
+        return answer; // 총 경로 개수 반환
+      }
+
+      // 7x7 미로 배열 (0=길, 1=벽)
+      let arr = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0, 1, 1],
+        [1, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0],
+      ];
+
+      console.log(solution(arr)); // 결과 출력
     </script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body></body>
 </html>
