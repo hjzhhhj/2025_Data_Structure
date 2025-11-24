@@ -6,24 +6,22 @@
         let answer = "";
 
         function traversal(v) {
-          // preOrder
-          // if(v>7) return;
-          // console.log(v);
-          // traversal(v*2);
-          // traversal(v*2+1);
-
-          // inOrder
-          // if(v>7) return;
-          // traversal(v*2);
-          // console.log(v);
-          // traversal(v*2+1);
-
-          // postOrder
           if (v > 7) return;
+          // preOrder - 전위 운행
+          // console.log(v);
+          // traversal(v*2);
+          // traversal(v*2+1);
+
+          // inOrder - 중위 운행
+          // traversal(v*2);
+          // console.log(v);
+          // traversal(v*2+1);
+
+          // postOrder - 후위 운행
           traversal(v * 2);
           traversal(v * 2 + 1);
           console.log(v);
-        } // traversal
+        }
 
         traversal(v);
 
