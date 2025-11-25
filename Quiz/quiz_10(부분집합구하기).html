@@ -27,6 +27,45 @@
       }
 
       console.log(solution(3));
+
+      // 실행 결과
+      // n = 3, v = 1
+      // ch[1] = 1
+      // DFS(2)
+      //   ch[2] = 1
+      //   DFS(3)
+      //     ch[3] = 1
+      //     DFS(4) -> n+1
+      //       temp = "1 2 3" -> answer.push(temp)
+      //     ch[3] = 0
+      //     DFS(4) -> n+1
+      //       temp = "1 2" -> answer.push(temp)
+      //   ch[2] = 0
+      //   DFS(3)
+      //     ch[3] = 1
+      //     DFS(4) -> n+1
+      //       temp = "1 3" -> answer.push(temp)
+      //     ch[3] = 0
+      //     DFS(4) -> n+1
+      //       temp = "1" -> answer.push(temp)
+      // ch[1] = 0
+      // DFS(2)
+      //   ch[2] = 1
+      //   DFS(3)
+      //     ch[3] = 1
+      //     DFS(4) -> n+1
+      //       temp = "2 3" -> answer.push(temp)
+      //     ch[3] = 0
+      //     DFS(4) -> n+1
+      //       temp = "2" -> answer.push(temp)
+      //   ch[2] = 0
+      //   DFS(3)
+      //     ch[3] = 1
+      //     DFS(4) -> n+1
+      //       temp = "3" -> answer.push(temp)
+      //     ch[3] = 0
+      //     DFS(4) -> n+1
+      //       temp = "" -> answer.push(temp)
     </script>
   </head>
   <body></body>
