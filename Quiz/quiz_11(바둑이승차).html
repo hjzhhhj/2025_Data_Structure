@@ -2,31 +2,103 @@
   <head>
     <title>바둑이 승차 - 이진트리(DFS)</title>
     <script>
+      // 만들 수 있는 무게 조합 중 제한 259 안에서 가장 큰 값
       function solution(c, arr) {
-        let answer = Number.MIN_SAFE_INTEGER; // 최대 합을 저장할 변수, 초기값은 매우 작은 값
-        let n = arr.length; // 물건(바둑이) 개수
-        let i = 1; // 선택 순서 출력용 (현재는 주석 처리)
+        let answer = Number.MIN_SAFE_INTEGER; // 엄청 작은 수 (여러 상황 대비 안전하게)
+        let n = arr.length;
 
         function DFS(L, sum) {
-          // L: 현재 물건 인덱스, sum: 현재까지 합
-          if (sum > c) return; // 합이 제한 용량 c를 넘으면 더 이상 진행 X
+          if (sum > c) return; // 259보다 크면 진행 X
           if (L === n) {
-            // 기저조건: 마지막 물건까지 확인했으면
-            // console.log(sum + " " + i++); // 선택된 합과 순서를 출력(디버그용)
-            answer = Math.max(answer, sum); // 최대 합 갱신
+            // 모든 바둑이 다 고려
+            answer = Math.max(answer, sum);
           } else {
-            // 재귀 호출: 현재 물건 선택 여부 결정
-            DFS(L + 1, sum + arr[L]); // 현재 물건 포함하고 다음 물건으로 이동
-            DFS(L + 1, sum); // 현재 물건 제외하고 다음 물건으로 이동
-          }
-        } // DFS
+            //            (시작)
+            //           /    \
+            //       싣는다     안 싣는다
+            //       /            \
+            //   다음 바둑이     다음 바둑이
+            //   /    \        /    \
+            // 싣기  안 싣기    싣기   안 싣기
 
-        DFS(0, 0); // 0번 인덱스 물건부터 DFS 시작, 초기 합 0
-        return answer; // 제한 용량 내 최대 합 반환
+            DFS(L + 1, sum + arr[L]); // 태우는 경우
+            DFS(L + 1, sum); // 태우지 않는 경우
+          }
+        }
+
+        DFS(0, 0);
+        return answer;
       }
 
-      let arr = [81, 58, 42, 33, 61]; // 각 바둑이 무게
-      console.log(solution(259, arr)); // 최대 합 출력
+      let arr = [81, 58, 42, 33, 61];
+      console.log(solution(259, arr));
+
+      // 실행 결과
+      // c = 259, arr = [81, 58, 42, 33, 61]
+      // answer = ?, n = 5
+      // DFS(0, 0)
+      //   DFS(1, 81)
+      //     DFS(2, 139)
+      //       DFS(3, 181)
+      //         DFS(4, 214)
+      //           DFS(5, 275) -> sum > c - return
+      //           DFS(5, 214) -> L === n - answer = 214
+      //         DFS(4, 181)
+      //           DFS(5, 242) -> L === n - answer = 242
+      //           DFS(5, 181) -> L === n - answer = 242
+      //       DFS(3, 139)
+      //         DFS(4, 172)
+      //           DFS(5, 233) -> L === n - answer = 242
+      //           DFS(5, 172) -> L === n - answer = 242
+      //         DFS(4, 139)
+      //           DFS(5, 200) -> L === n - answer = 242
+      //           DFS(5, 139) -> L === n - answer = 242
+      //     DFS(2, 81)
+      //       DFS(3, 114)
+      //         DFS(4, 147)
+      //           DFS(5, 208) -> L === n - answer = 242
+      //           DFS(5, 147) -> L === n - answer = 242
+      //         DFS(4, 114)
+      //           DFS(5, 175) -> L === n - answer = 242
+      //           DFS(5, 114) -> L === n - answer = 242
+      //       DFS(3, 81)
+      //         DFS(4, 114)
+      //           DFS(5, 175) -> L === n - answer = 242
+      //           DFS(5, 114) -> L === n - answer = 242
+      //         DFS(4, 81)
+      //           DFS(5, 142) -> L === n - answer = 242
+      //           DFS(5, 81) -> L === n - answer = 242
+      //   DFS(1, 0)
+      //     DFS(2, 58)
+      //       DFS(3, 100)
+      //         DFS(4, 133)
+      //           DFS(5, 194) -> L === n - answer = 242
+      //           DFS(5, 133) -> L === n - answer = 242
+      //         DFS(4, 100)
+      //           DFS(5, 161) -> L === n - answer = 242
+      //           DFS(5, 100) -> L === n - answer = 242
+      //       DFS(3, 58)
+      //         DFS(4, 91)
+      //           DFS(5, 152) -> L === n - answer = 242
+      //           DFS(5, 91) -> L === n - answer = 242
+      //         DFS(4, 58)
+      //           DFS(5, 119) -> L === n - answer = 242
+      //           DFS(5, 58) -> L === n - answer = 242
+      //     DFS(2, 0)
+      //       DFS(3, 42)
+      //         DFS(4, 75)
+      //           DFS(5, 136) -> L === n - answer = 242
+      //           DFS(5, 75) -> L === n - answer = 242
+      //         DFS(4, 42)
+      //           DFS(5, 103) -> L === n - answer = 242
+      //           DFS(5, 42) -> L === n - answer = 242
+      //       DFS(3, 0)
+      //         DFS(4, 33)
+      //           DFS(5, 94) -> L === n - answer = 242
+      //           DFS(5, 33) -> L === n - answer = 242
+      //         DFS(4, 0)
+      //           DFS(5, 61) -> L === n - answer = 242
+      //           DFS(5, 0) -> L === n - answer = 242
     </script>
   </head>
   <body></body>
