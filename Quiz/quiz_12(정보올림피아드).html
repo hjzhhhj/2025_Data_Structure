@@ -2,31 +2,88 @@
   <head>
     <title>정보올림피아드 - 이진트리</title>
     <script>
+      // 정해진 시간 안에서 가장 높은 점수를 얻도록 문제를 선택
       function solution(m, ps, pt) {
-        let answer = Number.MIN_SAFE_INTEGER; // 제한 시간 내 최대 점수를 저장할 변수
-        let n = ps.length; // 문제 개수
+        let answer = Number.MIN_SAFE_INTEGER;
+        let n = ps.length;
 
         function DFS(L, sum, time) {
-          // L: 문제 인덱스, sum: 현재 점수 합, time: 사용한 시간 합
-          if (time > m) return; // 제한 시간 초과 시 더 이상 진행 X
+          if (time > m) return; // 시간 초과
           if (L === n) {
-            // 기저조건: 모든 문제를 확인했으면
-            // console.log(sum, time);        // 디버그용: 현재 점수와 시간 출력
-            answer = Math.max(answer, sum); // 최대 점수 갱신
+            // 모든 문제 고려
+            answer = Math.max(answer, sum);
           } else {
-            // 재귀 호출: 문제 선택 여부 결정
-            DFS(L + 1, sum + ps[L], time + pt[L]); // 현재 문제 선택
-            DFS(L + 1, sum, time); // 현재 문제 미선택
+            DFS(L + 1, sum + ps[L], time + pt[L]); // 문제 L을 푼다
+            DFS(L + 1, sum, time); // 문제 L을 안 푼다
           }
         }
 
-        DFS(0, 0, 0); // 0번 문제부터 DFS 시작, 초기 점수 0, 초기 시간 0
-        return answer; // 제한 시간 내 최대 점수 반환
+        DFS(0, 0, 0);
+        return answer;
       }
 
-      let ps = [10, 25, 15, 6, 7]; // 각 문제 점수
-      let pt = [5, 12, 8, 3, 4]; // 각 문제 풀이 시간
-      console.log(solution(20, ps, pt)); // 제한 시간 20 내 최대 점수 출력
+      let ps = [10, 25, 15, 6, 7]; // 점수
+      let pt = [5, 12, 8, 3, 4]; // 풀이 시간
+      console.log(solution(20, ps, pt));
+
+      // 실행 결과
+      // m = 20, ps = [10, 25, 15, 6, 7], pt = [5, 12, 8, 3, 4]
+      // answer = ?, n = 5
+      // DFS(0, 0, 0)
+      //   DFS(1, 10, 5)
+      //     DFS(2, 35, 17)
+      //       DFS(3, 50, 25) -> time > m - return
+      //       DFS(3, 35, 17)
+      //         DFS(4, 41, 20)
+      //           DFS(5, 48, 24) -> time > m - return
+      //           DFS(5, 41, 20) -> L === n - answer = 41
+      //         DFS(4, 35, 17)
+      //           DFS(5, 42, 21) -> time > m - return
+      //           DFS(5, 35, 17) -> L === n - answer = 41
+      //     DFS(2, 10, 5)
+      //       DFS(3, 25, 13)
+      //         DFS(4, 31, 16)
+      //           DFS(5, 38, 20) -> L === n - answer = 41
+      //           DFS(5, 31, 16) -> L === n - answer = 41
+      //         DFS(4, 25, 13)
+      //           DFS(5, 32, 17) -> L === n - answer = 41
+      //           DFS(5, 25, 13) -> L === n - answer = 41
+      //       DFS(3, 10, 5)
+      //         DFS(4, 16, 8)
+      //           DFS(5, 23, 12) -> L === n - answer = 41
+      //           DFS(5, 16, 8) -> L === n - answer = 41
+      //         DFS(4, 10, 5)
+      //           DFS(5, 17, 9) -> L === n - answer = 41
+      //           DFS(5, 10, 5) -> L === n - answer = 41
+      //   DFS(1, 0, 0)
+      //     DFS(2, 25, 12)
+      //       DFS(3, 40, 20)
+      //         DFS(4, 46, 23) -> time > m - return
+      //         DFS(4, 40, 20)
+      //           DFS(5, 47, 24) -> time > m - return
+      //           DFS(5, 40, 20) -> L === n - answer = 41
+      //       DFS(3, 25, 12)
+      //         DFS(4, 31, 15)
+      //           DFS(5, 38, 19) -> L === n - answer = 41
+      //           DFS(5, 31, 15) -> L === n - answer = 41
+      //         DFS(4, 25, 12)
+      //           DFS(5, 32, 16) -> L === n - answer = 41
+      //           DFS(5, 25, 12) -> L === n - answer = 41
+      //     DFS(2, 0, 0)
+      //       DFS(3, 15, 8)
+      //         DFS(4, 21, 11)
+      //           DFS(5, 28, 15) -> L === n - answer = 41
+      //           DFS(5, 21, 11) -> L === n - answer = 41
+      //         DFS(4, 15, 8)
+      //           DFS(5, 22, 12) -> L === n - answer = 41
+      //           DFS(5, 15, 8) -> L === n - answer = 41
+      //       DFS(3, 0, 0)
+      //         DFS(4, 6, 3)
+      //           DFS(5, 13, 7) -> L === n - answer = 41
+      //           DFS(5, 6, 3) -> L === n - answer = 41
+      //         DFS(4, 0, 0)
+      //           DFS(5, 7, 4) -> L === n - answer = 41
+      //           DFS(5, 0, 0) -> L === n - answer = 41
     </script>
   </head>
   <body></body>
