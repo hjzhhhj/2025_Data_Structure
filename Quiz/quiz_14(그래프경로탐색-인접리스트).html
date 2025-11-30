@@ -2,53 +2,46 @@
   <head>
     <title>그래프탐색 - 인접리스트</title>
     <script>
-      // n: 노드 개수, arr: 간선 정보 (2차원 배열)
       function solution(n, arr) {
-        let answer = 0; // 총 경로 개수 저장
-        // 인접리스트 생성 (n+1개 배열, 1번~n번 사용)
+        // 1번 정점 → n번 정점으로 갈 수 있는 모든 경로의 개수
+        let answer = 0; // 완성된 경로 개수
         let graph = Array.from(Array(n + 1), () => Array());
-        // 방문 체크 배열
+        // let graph = [ [], [], [], [], [], [] ];
         let ch = Array.from({ length: n + 1 }, () => 0);
-        // 현재 경로 저장 배열
-        let path = [];
+        // let ch = [0, 0, 0, 0, 0, 0]; (방문 체크(재방문 방지))
+        let path = []; // 현재 가고 있는 경로 저장
 
-        // arr에 있는 간선 정보를 graph(인접리스트)에 반영
         for (let [a, b] of arr) {
-          graph[a].push(b); // a에서 b로 이동 가능
+          graph[a].push(b);
         }
+        // let graph = [ [], [2,3,4], [1,3,5], [4], [2,5], [] ];
 
-        // DFS 함수 정의
         function DFS(v) {
-          // 현재 노드 v
-          if (v === 5) {
-            // 기저조건: 마지막 노드 도달
-            answer++; // 경로 하나 발견
-            console.log(path); // 현재 경로 출력 (디버그용)
+          if (v === n) {
+            answer++;
+            console.log(path);
           } else {
-            // 재귀호출
             for (let i = 0; i < graph[v].length; i++) {
-              // v의 인접 노드 탐색
+              // 갈 수 있는 길만 확인
               if (ch[graph[v][i]] === 0) {
                 // 아직 방문하지 않았다면
-                ch[graph[v][i]] = 1; // 방문 체크
-                path.push(graph[v][i]); // 경로에 추가
-                DFS(graph[v][i]); // 재귀 호출
-                ch[graph[v][i]] = 0; // 방문 해제 (백트래킹)
-                path.pop(); // 경로에서 제거 (백트래킹)
+                ch[graph[v][i]] = 1;
+                path.push(graph[v][i]);
+                DFS(graph[v][i]);
+                ch[graph[v][i]] = 0;
+                path.pop();
               }
             }
           }
         }
 
-        // DFS 시작
-        path.push(1); // 시작 노드 1 추가
-        ch[1] = 1; // 1번 노드 방문 체크
-        DFS(1); // DFS 시작
+        path.push(1);
+        ch[1] = 1;
+        DFS(1);
 
-        return answer; // 총 경로 개수 반환
+        return answer;
       }
 
-      // 간선 정보 배열
       let arr = [
         [1, 2],
         [1, 3],
@@ -61,7 +54,35 @@
         [4, 5],
       ];
 
-      console.log(solution(5, arr)); // 결과 출력
+      console.log(solution(5, arr));
+
+      // 실행 결과
+      // n = 5, v = 1
+      // path = [1,2]
+      //   path = [1,2,3]
+      //     path = [1,2,3,4]
+      //       path = [1,2,3,4,5] -> answer++
+      //     path = [1,2,3]
+      //   path = [1,2]
+      //     path = [1,2,5] -> answer++
+      //   path = [1,2]
+      // path = [1,3]
+      //   path = [1,3,4]
+      //     path = [1,3,4,5] -> answer++
+      //   path = [1,3,4]
+      //     path = [1,3,4,2]
+      //       path = [1,3,4,2,5] -> answer++
+      //     path = [1,3,4,2]
+      //   path = [1,3]
+      // path = [1,4]
+      //   path = [1,4,2]
+      //     path = [1,4,2,3]
+      //       path = [1,4,2,3,4] -> 방문 체크 되어 진행 X
+      //     path = [1,4,2]
+      //       path = [1,4,2,5] -> answer++
+      //   path = [1,4]
+      //     path = [1,4,5] -> answer++
+      // answer = 6
     </script>
   </head>
   <body></body>
