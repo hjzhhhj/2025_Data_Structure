@@ -5,37 +5,32 @@
   <body>
     <script>
       function solution() {
-        let answer = 0; // 총 경로 개수
-        // 상, 우, 하, 좌 이동
-        const dx = [-1, 0, 1, 0];
-        const dy = [0, 1, 0, -1];
+        // 0 = 길, 1 = 벽
+        let answer = 0;
+        const dx = [-1, 0, 1, 0]; // 상, 우, 하, 좌
+        const dy = [0, 1, 0, -1]; // 상, 우, 하, 좌
 
-        // DFS 함수 정의
         function DFS(y, x) {
           if (y === 6 && x === 6) {
-            // 도착점에 도달하면
-            answer++; // 경로 발견
-            return; // 종료
+            answer++; // 도착지에 도달하면 경로 개수 증가
           }
-          // 상, 우, 하, 좌 이동 탐색
-          for (let i = 0; i < 4; i++) {
+          for (let i = 0; i < dx.length; i++) {
             const ny = y + dy[i];
             const nx = x + dx[i];
-            // 미로 범위 안이고, 길이면 이동
             if (ny >= 0 && ny < 7 && nx >= 0 && nx < 7 && arr[ny][nx] === 0) {
-              arr[ny][nx] = 1; // 방문 표시
-              DFS(ny, nx); // 재귀 호출
-              arr[ny][nx] = 0; // 백트래킹: 방문 해제
+              // 이동 가능하면
+              arr[ny][nx] = 1;
+              DFS(ny, nx);
+              arr[ny][nx] = 0;
             }
           }
         }
 
-        arr[0][0] = 1; // 시작점 방문 표시
-        DFS(0, 0); // DFS 시작
-        return answer; // 총 경로 개수 반환
+        arr[0][0] = 1;
+        DFS(0, 0);
+        return answer;
       }
 
-      // 7x7 미로 배열 (0 = 길, 1 = 벽)
       let arr = [
         [0, 0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 1, 1, 0],
@@ -47,6 +42,40 @@
       ];
 
       console.log(solution());
+
+      // 실행 결과
+      // board[0, 0] = 1
+      // DFS(0, 0)
+      //   k = 0
+      //     nx = -1, ny = 0 (범위 벗어남)
+      //   k = 1
+      //     nx = 0, ny = 1 (이동 가능)
+      //     board[0, 1] = 1
+      //     DFS(0, 1)
+      //       k = 0
+      //         nx = -1, ny = 1 (범위 벗어남)
+      //       k = 1
+      //         nx = 0, ny = 2 (이동 가능)
+      //         board[0, 2] = 1
+      //         DFS(0, 2)
+      //           ...
+      //           ...
+      //           DFS(6, 6) -> answer++
+      //         board[0, 2] = 0
+      //       k = 2
+      //         nx = 1, ny = 1 (벽)
+      //       k = 3
+      //         nx = 0, ny = 0 (이미 방문)
+      //     board[0, 1] = 0
+      //   k = 2
+      //     nx = 1, ny = 0 (이동 가능)
+      //     board[1, 0] = 1
+      //     DFS(1, 0)
+      //       ...
+      //     board[1, 0] = 0
+      //   k = 3
+      //     nx = 0, ny = -1 (범위 벗어남)
+      // answer = 8
     </script>
   </body>
 </html>
